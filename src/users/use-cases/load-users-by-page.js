@@ -1,23 +1,18 @@
+import { localhostUserToModel } from '../mappers/localhost-user.mapper';
+import { User } from '../models/user';
 
 /**
  * 
- * @param {Number} page función que nos permitira llamar a los usuarios.
- * @returns
+ * @param {Number} page 
+ * @returns { Promise<User[]> }
  */
-export const loadUsersByPage = async (page = 1) => {
+export const loadUsersByPage = async( page = 1 ) => {
 
-  //URL para hacer la petición 
+    const url = `${ import.meta.env.VITE_BASE_URL }/users?_page=${ page }`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-  const url = `${import.meta.env.VITE_BASE_URL}/users?_page=${ page }`;
+    const users = data.map( localhostUserToModel );
 
-  //FETCH
-  const res = await fetch(url);
-
-  //DATA EN SU FORMA JSON
-  const data = await res.json();
-
-
-  console.log(data);
-
-
+    return users;
 }

@@ -7,18 +7,15 @@ export class User {
    * 
    * @param {Like<Obeject>} userDateLike 
    */
-  constructor(id, isActive, balance, avatar, firtName, lastName, gender){
+  constructor({id, isActive, balance, avatar, firstName, lastName, gender}){
     
     this.id         = id; 
     this.isActive   = isActive;
     this.balance    = balance;
     this.avatar     = avatar;
-    this.firtName   = firtName;
+    this.firstName  = firstName;
     this.lastName   = lastName;
     this.gender     = gender;
 
-
   }
-
-
 }
