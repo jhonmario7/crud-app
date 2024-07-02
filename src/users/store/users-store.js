@@ -1,47 +1,35 @@
 import { loadUsersByPage } from "../use-cases/load-users-by-page";
 
-
 const state = {
-
   currentPage: 0,
   users: [],
-
-}
+};
 
 //Metodos:
 
-const loadNextPage = async() => {
+const loadNextPage = async () => {
+  const users = await loadUsersByPage(state.currentPage + 1);
+  if (users.length === 0) return;
 
-  await loadUsersByPage( state.currentPage + 1);
+  state.currentPage += 1;
+  state.users = users;
+  // console.log(state);
+};
 
-
-}
-
-
-const loadPreviusPage = async() => {
-
-  throw new Error ('No Implementado');
-
-}
+const loadPreviusPage = async () => {
+  throw new Error("No Implementado");
+};
 
 const onUserChange = () => {
+  throw new Error("No implementado");
+};
 
-  throw new Error ('No implementado')
-
-
-}
-
-
-//TODO: 
+//TODO:
 const reloadPage = () => {
-
-  throw new Error ('No implementado')
-
-
-}
+  throw new Error("No implementado");
+};
 
 export default {
-
   loadNextPage,
   loadPreviusPage,
   onUserChange,
@@ -51,11 +39,18 @@ export default {
 
   //OPERADOR SPER "..." para esparcir cada uno de ellos.
 
-  getUser: () => [...state.users],
+  /**
+   *
+   * @returns {User[]}
+   */
+  getUsers: () => [...state.users],
 
-    //Para saber cual es la pagina actual, y este no va pasar por referencua como el de arriba, porque los primitivos
-    // que en este caso un "0" pasan por valor. Los Objetos siempre pasan por referencia en JS y los Objetos por valor.
-    getCurrentPage: () => state.currentPage,
+  //Para saber cual es la pagina actual, y este no va pasar por referencua como el de arriba, porque los primitivos
+  // que en este caso un "0" pasan por valor. Los Objetos siempre pasan por referencia en JS y los Objetos por valor.
 
-
-}
+  /**
+   *
+   * @returns {Number}
+   */
+  getCurrentPage: () => state.currentPage,
+};
