@@ -36,9 +36,9 @@ export const renderTable = (element) => {
     element.append(table);
 
     // TODO: Listeners a la table
+    
   }
-
-  let tableHTML = "";
+  let tableHTML = '';
 
   users.forEach((user) => {
     tableHTML += `
@@ -57,5 +57,5 @@ export const renderTable = (element) => {
     `;
   });
 
-  table.querySelector("tbody").innerHTML = tableHTML;
+  table.querySelector('tbody').innerHTML = tableHTML;
 };

@@ -17,7 +17,10 @@ const loadNextPage = async () => {
 };
 
 const loadPreviusPage = async () => {
-  throw new Error("No Implementado");
+  if (state.currentPage === 1) return;
+  const users = await loadUsersByPage(state.currentPage - 1);
+  state.users = users;
+  state.currentPage -= 1;
 };
 
 const onUserChange = () => {
