@@ -16,25 +16,47 @@ const loadNextPage = async () => {
   // console.log(state);
 };
 
-const loadPreviusPage = async () => {
+const loadPreviousPage = async () => {
   if (state.currentPage === 1) return;
   const users = await loadUsersByPage(state.currentPage - 1);
+  
   state.users = users;
   state.currentPage -= 1;
 };
 
-const onUserChange = () => {
-  throw new Error("No implementado");
+/**
+ * @param {User} updateUser
+ */
+const onUserChange = (updateUser) => {
+  let wasFound = false;
+
+  state.users = state.users.map(user => {
+    if (user.id === updateUser.id) {
+      wasFound = true;
+      return updateUser;
+    }
+    return user;
+  });
+
+  if (state.users.length < 10 && !wasFound) {
+    state.users.push(updateUser);
+  }
 };
 
-//TODO:
-const reloadPage = () => {
-  throw new Error("No implementado");
-};
+
+const reloadPage = async() => {
+  const users = await loadUsersByPage(state.currentPage);
+  if (users.length === 0) {
+    await loadPreviousPage();
+    return;
+  };
+  state.users = users;
+}; 
+
 
 export default {
   loadNextPage,
-  loadPreviusPage,
+  loadPreviousPage,
   onUserChange,
   reloadPage,
 

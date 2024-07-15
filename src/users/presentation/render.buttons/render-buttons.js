@@ -31,7 +31,7 @@ export const renderButtons = (element) => {
 
     prevButton.addEventListener ('click', async() =>{
 
-      await usersStore.loadPreviusPage();
+      await usersStore.loadPreviousPage();
       currentPegeLabel.innerText = usersStore.getCurrentPage(); 
       renderTable(element);
 

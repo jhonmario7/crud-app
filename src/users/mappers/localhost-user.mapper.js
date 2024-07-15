@@ -11,7 +11,6 @@ import { User } from './../models/user';
 
     //Regresar una nueva instancia de nuestro usuario.
       const {
-
         avatar,
         balance,
         first_name,
